@@ -1,0 +1,19 @@
+apiVersion: v1
+data:
+  tasks.py: |-
+    from locust import HttpLocust, TaskSet, task
+
+    class ElbTasks(TaskSet):
+      @task
+      def status(self):
+          self.client.get("/productpage")
+
+    class ElbWarmer(HttpLocust):
+      task_set = ElbTasks
+      stop_timeout = 180
+      min_wait = 1000
+      max_wait = 3000
+kind: ConfigMap
+metadata:
+  name: locust-worker-configs
+  namespace: loadtesting
