@@ -10,7 +10,7 @@ data:
 
     class ElbWarmer(HttpLocust):
       task_set = ElbTasks
-      stop_timeout = 180
+      #stop_timeout = 120
       min_wait = 1000
       max_wait = 3000
 kind: ConfigMap
